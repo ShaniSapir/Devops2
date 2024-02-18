@@ -2,6 +2,7 @@ function checkName(name) {
   if (/^[A-Za-z]+$/.test(name) && name !== '' && name != null) {
     return true;
   }
+
   return false;
 }
 

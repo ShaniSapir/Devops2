@@ -29,19 +29,29 @@
       <input type="number" id="exam3" name="exam3" required />
     </div>
     <button id="submit" type="submit">Submit</button>
+    
   </form>
   <button id="allStorage" onclick="allStorage()">All Storage</button>
 
+
   <div id="output"></div>
+
+  <button id="calculateAverage" onclick="calculateAverage()">Calculate Average</button>
+    <div id="averageOutput"></div>
+  <script> document.getElementById("calculateAverage").addEventListener("click", calculateAverage);
+</script>
+
+  <button id="clearStorage">Clear Storage</button>
 
   <script src="./checkValidation.js"></script>
   <script src="./infoStorage.js"></script>
+
   <script>
     document
       .getElementById("form")
       .addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent form submission
-
+        
         // Get the form data
         const formData = new FormData(event.target);
         const studentData = {
@@ -60,6 +70,7 @@
         alert("Registration successful!");
       });
   </script>
+  
 </body>
 
 </html>

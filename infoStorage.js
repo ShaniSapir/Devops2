@@ -8,6 +8,26 @@ exam1Input.addEventListener("input", validateGrade);
 exam2Input.addEventListener("input", validateGrade);
 exam3Input.addEventListener("input", validateGrade);
 
+
+
+function calculateAverage() {
+  //conver it from string into integer
+  var exam1 = parseInt(document.getElementById("exam1").value);
+  var exam2 = parseInt(document.getElementById("exam2").value);
+  var exam3 = parseInt(document.getElementById("exam3").value);
+
+  var name = document.getElementById("name").value;
+
+ 
+  if (checkGrade(exam3) && checkGrade(exam1) && checkGrade(exam2)&& checkName(name)) {
+    
+    var average = (exam1 + exam2 + exam3) / 3;
+    document.getElementById("averageOutput").innerText = "Average Grade: " + average.toFixed(2);
+  } else {
+    document.getElementById("averageOutput").innerText = "Please enter valid grades for all exams.";
+  }
+}
+
 //Name Validation
 function validateName(event) {
   var name = event.target.value;
@@ -83,6 +103,16 @@ function allStorage() {
   } else {
     outputElement.innerHTML = "There is no data in local storage.";
   }
+
+  // Function to clear local storage
+function clearLocalStorage() {
+  localStorage.clear();
+  alert("Local storage has been cleared.");
 }
+
+// Attach event listener to the button
+document.getElementById("clearStorage").addEventListener("click", clearLocalStorage);
+}
+
 
 window.allStorage = showLocalStorage;

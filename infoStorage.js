@@ -1,110 +1,61 @@
-var nameInput = document.getElementById("name");
-var exam1Input = document.getElementById("exam1");
-var exam2Input = document.getElementById("exam2");
-var exam3Input = document.getElementById("exam3");
+document.getElementById("registrationForm").addEventListener("submit", function (event) {
+  event.preventDefault();
 
-nameInput.addEventListener("input", validateName);
-exam1Input.addEventListener("input", validateGrade);
-exam2Input.addEventListener("input", validateGrade);
-exam3Input.addEventListener("input", validateGrade);
+  const formData = new FormData(event.target);
+  const userData = {
+    firstName: formData.get("firstName"),
+    lastName: formData.get("lastName"),
+    idCard: formData.get("idCard"),
+    password: formData.get("password"),
+    role: formData.get("role"),
+    course: formData.get("course") || null,
+    mathematics: 0,
+    physics: 0,
+    english: 0
+  };
 
-
-
-function calculateAverage() {
-  //conver it from string into integer
-  var exam1 = parseInt(document.getElementById("exam1").value);
-  var exam2 = parseInt(document.getElementById("exam2").value);
-  var exam3 = parseInt(document.getElementById("exam3").value);
-
-  var name = document.getElementById("name").value;
-
- 
-  if (checkGrade(exam3) && checkGrade(exam1) && checkGrade(exam2)&& checkName(name)) {
-    
-    var average = (exam1 + exam2 + exam3) / 3;
-    document.getElementById("averageOutput").innerText = "Average Grade: " + average.toFixed(2);
+  if (validateUserData(userData)) {
+    registerUser(userData);
+    alert("Registration successful!");
+    window.location.href = "login.html"; // Redirect to login page
   } else {
-    document.getElementById("averageOutput").innerText = "Please enter valid grades for all exams.";
+    alert("One of the inputs is incorrect. Please check and try again.");
   }
-}
+});
 
-//Name Validation
-function validateName(event) {
-  var name = event.target.value;
-  var isValid = checkName(name);
-  var validationMessage = isValid ? "" : "Invalid name";
-  nameInput.setCustomValidity(validationMessage);
-}
-
-//Grade of exam-1 Validation
-function validateGrade(event) {
-  var exam1Value = event.target.value;
-  var isValid = checkGrade(exam1Value);
-  var validationMessage = isValid ? "" : "Invalid grade";
-  event.target.setCustomValidity(validationMessage);
-}
-
-//Grade of exam-2 Validation
-function validateGrade(event) {
-  var exam2Value = event.target.value;
-  var isValid = checkGrade(exam2Value);
-  var validationMessage = isValid ? "" : "Invalid grade";
-  event.target.setCustomValidity(validationMessage);
-}
-
-//Grade of exam-3 Validation
-function validateGrade(event) {
-  var exam3Value = event.target.value;
-  var isValid = checkGrade(exam3Value);
-  var validationMessage = isValid ? "" : "Invalid grade";
-  event.target.setCustomValidity(validationMessage);
-}
-
-function allStorage() {
-  var studentInfo = localStorage.getItem("studentData");
-  var outputElement = document.getElementById("output");
-
-  if (studentInfo) {
-    try {
-      var parsedData = JSON.parse(studentInfo);
-
-      // If the parsed data is an array
-      if (Array.isArray(parsedData)) {
-        var html = "";
-
-        // Get the data
-        parsedData.forEach(function (student) {
-          var name = student.name;
-          var exam1 = student.exam1;
-          var exam2 = student.exam2;
-          var exam3 = student.exam3;
-
-          // Displaying the stored data
-          html +=
-            "<p>Name: " +
-            name +
-            "   Exam 1: " +
-            exam1 +
-            "   Exam 2: " +
-            exam2 +
-            "   Exam 3: " +
-            exam3 +
-            "</p>";
-        });
-
-        outputElement.innerHTML = html;
-      } else {
-        outputElement.innerHTML = "Invalid format.";
-      }
-    } catch (error) {
-      outputElement.innerHTML = "Error! - parsing data from local storage.";
-      console.error(error);
-    }
-  } else {
-    outputElement.innerHTML = "There is no data in local storage.";
+function validateUserData(userData) {
+  if (!/^[a-zA-Z]{1,20}$/.test(userData.firstName)) {
+    console.log("firstName", userData.firstName)
+    return false;
   }
 
-  // Function to clear local storage
+// Validation for last name
+  if (!/^[a-zA-Z]{1,20}$/.test(userData.lastName)) {
+    console.log("lastName")
+    return false;
+  }
+  if (userData.idCard.length !== 9 || isNaN(userData.idCard)) return false;
+  if (userData.password.length < 6 || userData.password.length > 10) return false;
+
+  // Check if ID card already exists in the system
+  var existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+  var userExists = existingUsers.some(user => user.idCard === userData.idCard);
+  if (userExists) {
+    alert("User with the same ID card already exists.");
+
+    return false;
+  }
+  // You can add more validation rules here if needed
+  return true;
+}
+
+function registerUser(userData) {
+  var existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+  existingUsers.push(userData);
+  localStorage.setItem("users", JSON.stringify(existingUsers));
+}
+
+// Function to clear local storage
 function clearLocalStorage() {
   localStorage.clear();
   alert("Local storage has been cleared.");
@@ -112,7 +63,3 @@ function clearLocalStorage() {
 
 // Attach event listener to the button
 document.getElementById("clearStorage").addEventListener("click", clearLocalStorage);
-}
-
-
-window.allStorage = showLocalStorage;

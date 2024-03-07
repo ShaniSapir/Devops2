@@ -13,6 +13,9 @@ document.getElementById("registrationForm").addEventListener("submit", function 
     physics: 0,
     english: 0
   };
+  
+  localStorage.setItem('userData', JSON.stringify(userData));
+  
 
   if (validateUserData(userData)) {
     registerUser(userData);

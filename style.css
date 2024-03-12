@@ -45,6 +45,11 @@ button:hover {
 #submit {
   margin-left: 100px;
 }
+
+#courseSelection {
+  display: none;
+}
+
 #allStorage {
   margin-top: 10px;
   margin-left: 510px;
@@ -54,9 +59,11 @@ button:hover {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }

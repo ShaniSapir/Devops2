@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher's Page</title>
+  <link rel="stylesheet" href="teachers.css">
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="teachersTitle">Teacher's Page</h2>
+    <form id="gradeForm">
+      <label for="studentNumber">Student Number:</label>
+      <input type="text" id="studentNumber" name="studentNumber" required>
+
+      <label for="grade">Grade:</label>
+      <input type="number" id="grade" name="grade" min="0" max="100" required>
+
+      <button type="submit">Submit Grade</button>
+    </form>
+  </div>
+
+  <script src="teachers.js"></script>
+</body>
+
+</html>

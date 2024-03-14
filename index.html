@@ -85,6 +85,7 @@
        -->
       </div>
     </div>
+<<<<<<< HEAD
 
     <script src="./infoStorage.js"></script>
     <script>
@@ -99,3 +100,62 @@
     </script>
   </body>
 </html>
+=======
+    <div>
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" maxlength="20" required />
+    </div>
+    <div>
+      <label for="idCard">ID Card:</label>
+      <input type="text" id="idCard" name="idCard" pattern="[0-9]{9}" required />
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" minlength="6" maxlength="10" required />
+    </div>
+    <div>
+      <label for="role">What would you like to register as?</label>
+      <select id="role" name="role">
+        <option value="student" selected>Student</option>
+        <option value="lecturer">Lecturer</option>
+      </select>
+    </div>
+    <div id="courseSelection">
+      <label for="course">Select a course:</label>
+      <select id="course" name="course">
+        <option value="null" selected>Choose Subject</option>
+        <option value="Mathematics">Mathematics</option>
+        <option value="Physics">Physics</option>
+        <option value="English">English</option>
+      </select>
+    </div>
+    <button type="submit">Register</button>
+  </form>
+
+  <div>
+    <p>Already have an account? <button id="loginButton">Login</button></p>
+  </div>
+
+  <div>
+    <button id="clearStorage">Clear Storage</button>
+  </div>
+
+  <script src="./infoStorage.js"></script>
+  <script>
+    document.getElementById("role").addEventListener("change", function () {
+      var courseSelection = document.getElementById("courseSelection");
+      if (this.value === "lecturer") {
+        courseSelection.style.display = "block";
+      } else {
+        courseSelection.style.display = "none";
+      }
+    });
+
+    document.getElementById("loginButton").addEventListener("click", function () {
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+
+</html>
+>>>>>>> a9f63e08c2828257697c09981fbc4c2d0edaa692

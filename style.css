@@ -1,70 +1,125 @@
-form {
-  width: 300px;
-  margin-top: 50px;
-  margin-left: 420px;
-  /*margin: 20px auto;*/
-}
-
-div {
-  margin-bottom: 10px;
-}
-
-label {
-  display: inline-block;
-  width: 100px;
-}
-
-input[type="text"] {
-  width: 150px;
-}
-
-input[type="number"] {
-  width: 150px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: linear-gradient(-45deg, #e8a48f, #f299bb, #80c8e2, #95f1dc);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  font-family: "Times New Roman", Times, serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-button {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 15px;
-  border: none;
-  border-radius: 5%;
-  cursor: pointer;
-  background-color: rgba(245, 245, 245, 0.905);
-  transition: background-color 0.3s;
+.frame {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-button:hover {
-  background-color: rgba(203, 236, 240, 0.905);
+.container {
+  width: 300px; /* Reduced container width */
+  background-color: #fff;
+  padding: 10px; /* Reduced padding */
 }
 
-#submit {
-  margin-left: 100px;
+h2 {
+  text-align: center;
+  margin-bottom: 10px; /* Reduced margin */
+  font-size: 12px; /* Reduced font size */
+}
+
+.form-group {
+  margin-bottom: 10px; /* Reduced margin */
+}
+
+.label-row {
+  display: flex;
+}
+
+.label-row label {
+  flex: 1;
+  margin-right: 5px; /* Reduced margin */
+  font-size: 12px; /* Reduced font size */
+}
+
+.input-row {
+  display: flex;
+}
+
+.input-row input {
+  width: calc(50% - 5px); /* Adjusted width for input fields */
+  margin-right: 5px; /* Reduced margin */
+}
+
+.input-row input:last-child {
+  margin-right: 0; /* No margin for the last input field */
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 3px; /* Reduced margin */
+  font-size: 12px;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 4px; /* Reduced padding */
+  font-size: 12px; /* Reduced font size */
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: center;
+  margin-bottom: 20px;
 }
 
 #courseSelection {
   display: none;
 }
 
-#allStorage {
-  margin-top: 10px;
-  margin-left: 510px;
+button[type="submit"] {
+  width: 100%;
+  padding: 8px; /* Reduced padding */
+  font-size: 14px; /* Reduced font size */
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
 }
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
 
-  50% {
-    background-position: 100% 50%;
-  }
+.login-link {
+  text-align: center;
+  margin-top: 10px; /* Reduced margin */
+}
 
-  100% {
-    background-position: 0% 50%;
-  }
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: none; /* Removed underline */
+}
+
+.clear-storage {
+  margin-top: 10px; /* Reduced margin */
 }

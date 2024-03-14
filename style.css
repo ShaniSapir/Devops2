@@ -106,22 +106,20 @@ button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-#submit {
-  margin-left: 100px;
-}
-#allStorage {
-  margin-top: 10px;
-  margin-left: 510px;
+.login-link {
+  text-align: center;
+  margin-top: 10px; /* Reduced margin */
 }
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: none; /* Removed underline */
+}
+
+.clear-storage {
+  margin-top: 10px; /* Reduced margin */
 }

@@ -20,19 +20,24 @@ body {
 }
 
 .container {
-  width: 300px; /* Reduced container width */
+  width: 300px;
+  /* Reduced container width */
   background-color: #fff;
-  padding: 10px; /* Reduced padding */
+  padding: 10px;
+  /* Reduced padding */
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 10px; /* Reduced margin */
-  font-size: 12px; /* Reduced font size */
+  margin-bottom: 10px;
+  /* Reduced margin */
+  font-size: 12px;
+  /* Reduced font size */
 }
 
 .form-group {
-  margin-bottom: 10px; /* Reduced margin */
+  margin-bottom: 10px;
+  /* Reduced margin */
 }
 
 .label-row {
@@ -41,8 +46,10 @@ h2 {
 
 .label-row label {
   flex: 1;
-  margin-right: 5px; /* Reduced margin */
-  font-size: 12px; /* Reduced font size */
+  margin-right: 5px;
+  /* Reduced margin */
+  font-size: 12px;
+  /* Reduced font size */
 }
 
 .input-row {
@@ -50,18 +57,22 @@ h2 {
 }
 
 .input-row input {
-  width: calc(50% - 5px); /* Adjusted width for input fields */
-  margin-right: 5px; /* Reduced margin */
+  width: calc(50% - 5px);
+  /* Adjusted width for input fields */
+  margin-right: 5px;
+  /* Reduced margin */
 }
 
 .input-row input:last-child {
-  margin-right: 0; /* No margin for the last input field */
+  margin-right: 0;
+  /* No margin for the last input field */
 }
 
 label {
   display: block;
   font-weight: bold;
-  margin-bottom: 3px; /* Reduced margin */
+  margin-bottom: 3px;
+  /* Reduced margin */
   font-size: 12px;
 }
 
@@ -69,16 +80,19 @@ input[type="text"],
 input[type="password"],
 select {
   width: 100%;
-  padding: 4px; /* Reduced padding */
-  font-size: 12px; /* Reduced font size */
+  padding: 4px;
+  /* Reduced padding */
+  font-size: 12px;
+  /* Reduced font size */
   border: 1px solid #ccc;
   border-radius: 3px;
 }
 
 select {
-  appearance: none;
+
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
   background: transparent;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -93,8 +107,10 @@ select {
 
 button[type="submit"] {
   width: 100%;
-  padding: 8px; /* Reduced padding */
-  font-size: 14px; /* Reduced font size */
+  padding: 8px;
+  /* Reduced padding */
+  font-size: 14px;
+  /* Reduced font size */
   border: none;
   border-radius: 3px;
   background-color: #007bff;
@@ -108,7 +124,8 @@ button[type="submit"]:hover {
 
 .login-link {
   text-align: center;
-  margin-top: 10px; /* Reduced margin */
+  margin-top: 10px;
+  /* Reduced margin */
 }
 
 .login-link a {
@@ -117,9 +134,11 @@ button[type="submit"]:hover {
 }
 
 .login-link a:hover {
-  text-decoration: none; /* Removed underline */
+  text-decoration: none;
+  /* Removed underline */
 }
 
 .clear-storage {
-  margin-top: 10px; /* Reduced margin */
+  margin-top: 10px;
+  /* Reduced margin */
 }

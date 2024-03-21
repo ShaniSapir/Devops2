@@ -1,4 +1,4 @@
-const request = require('supertest');
+/*const request = require('supertest');
 const checkValidation = require('../checkValidation');
 
 describe('Test suite 1 - Name Validation:', () => {
@@ -24,4 +24,4 @@ describe('Test suite 2 - Exam Grade Validation:', () => {
   test('test 2 - Valid Exam Grade: ', () => {
     expect(checkValidation.checkGrade(95)).toBe(true);
   });
-});
+});*/

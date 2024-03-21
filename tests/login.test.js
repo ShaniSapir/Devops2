@@ -1,4 +1,4 @@
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const { Builder, By, Key, until } = require('selenium-webdriver');
 
 // Define your Selenium WebDriver setup
 (async function example() {
@@ -6,7 +6,7 @@ const {Builder, By, Key, until} = require('selenium-webdriver');
     try {
         // Open the login page
         await driver.get('http://localhost:3000/login.html'); // Replace "file:///path/to/login.html" with the actual file path
-        
+
         // Find input fields and button
         const idCardInput = await driver.findElement(By.id('idCard'));
         const passwordInput = await driver.findElement(By.id('password'));

@@ -4,9 +4,10 @@
   "description": "README File",
   "main": "index.js",
   "scripts": {
-    "test": "node tests/registration.test.js && node tests/login.test.js ",
+    "test": "node tests/test1.test.js",
     "lint": "eslint . --color",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test:selenium": "mocha tests/Selenium/*.js"
   },
   "author": "Shani",
   "license": "ISC",

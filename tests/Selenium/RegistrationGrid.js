@@ -12,7 +12,7 @@ import('chai').then(({ expect }) => {
     } else if (browser === 'firefox') {
       driver = await new Builder()
         .forBrowser('firefox')
-        .usingWebDriverProxy('http://your-selenium-grid-hub:4444')
+        .usingWebDriverProxy('http://localhost:4444/wd/hub')
         .withCapabilities(firefoxCapabilities)
         .build();
     } else {

@@ -1,36 +1,89 @@
-document.getElementById("registrationForm").addEventListener("submit", function (event) {
-  event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const errorElement = document.getElementById("errorLabel");
+  const successfulElement = document.getElementById("registratinSuccessful");
 
-  const formData = new FormData(event.target);
-  const userData = {
-    firstName: formData.get("firstName"),
-    lastName: formData.get("lastName"),
-    idCard: formData.get("idCard"),
-    password: formData.get("password"),
-    role: formData.get("role"),
-    course: formData.get("course") || null
-  };
+  document
+    .getElementById("registrationForm")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
 
-  // Send form data to backend
-  fetch('/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userData)
-  })
-    .then(response => {
-      if (response.ok) {
-        alert("Registration successful!");
-        window.location.href = "login.html"; // Redirect to login page
-      } else {
-        return response.json().then(error => {
-          alert("Error: " + error.message);
-        });
+      // Debugging: Log a message when the form is submitted
+      console.log("Form submitted");
+
+      // Validate inputs
+      const firstName = document.getElementById("firstName").value;
+      const lastName = document.getElementById("lastName").value.trim();
+      const idCard = document.getElementById("idCard").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // Regular expressions for validation
+      const nameRegex = /^[A-Za-z]{1,20}$/;
+      const idCardRegex = /^[0-9]{9}$/;
+      const passwordRegex = /^.{9}$/;
+
+      let isValid = true;
+
+      if (
+        !nameRegex.test(firstName) ||
+        !nameRegex.test(lastName) ||
+        !idCardRegex.test(idCard) ||
+        !passwordRegex.test(password)
+      ) {
+        isValid = false;
       }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert("An error occurred. Please try again later.");
+
+      // Check if ID card already exists
+      const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+      if (existingUsers.some((user) => user.idCard === idCard)) {
+        displayError(
+          "ID Card number already exists. Please use a different one."
+        );
+        isValid = false;
+      }
+
+      if (!isValid) {
+        return;
+      }
+
+      // If all inputs are valid, proceed with registration
+      const formData = new FormData(event.target);
+      const userData = {
+        firstName,
+        lastName,
+        idCard,
+        password,
+        role: formData.get("role"),
+        course: formData.get("course") || null,
+      };
+
+      // Add the new user to existing users
+      existingUsers.push(userData);
+      localStorage.setItem("users", JSON.stringify(existingUsers));
+
+      // Clear any previous error message
+      clearError();
+
+      // Display successful registration message
+      displaySuccessful("Registration successful!");
+
+      // Redirect to login page after a short delay
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000);
     });
+
+  // Clear error message function
+  function clearError() {
+    errorElement.textContent = "";
+  }
+
+  // Display error message function
+  function displayError(message) {
+    errorElement.textContent = message;
+  }
+
+  // Display successful message function
+  function displaySuccessful(message) {
+    successfulElement.textContent = message;
+  }
 });

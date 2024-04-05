@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       if (!isValid) {
-        return;
-      }
+        
+      
 
       // If all inputs are valid, proceed with registration
       const formData = new FormData(event.target);
@@ -70,8 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         window.location.href = "login.html";
       }, 2000);
+    }
     });
-
+  
   // Clear error message function
   function clearError() {
     errorElement.textContent = "";

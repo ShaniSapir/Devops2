@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const errorElement = document.getElementById("errorLabel");
-  const successfulElement = document.getElementById("registratinSuccessful");
+  clearError();
 
   document
     .getElementById("registrationForm")
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
 
       // Debugging: Log a message when the form is submitted
-      console.log("Form submitted");
+      //console.log("Form submitted");
 
       // Validate inputs
       const firstName = document.getElementById("firstName").value;
@@ -32,47 +32,71 @@ document.addEventListener("DOMContentLoaded", function () {
         isValid = false;
       }
 
-      // Check if ID card already exists
-      const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-      if (existingUsers.some((user) => user.idCard === idCard)) {
-        displayError(
-          "ID Card number already exists. Please use a different one."
-        );
-        isValid = false;
-      }
-
       if (!isValid) {
-        
-      
-
-      // If all inputs are valid, proceed with registration
-      const formData = new FormData(event.target);
-      const userData = {
-        firstName,
-        lastName,
-        idCard,
-        password,
-        role: formData.get("role"),
-        course: formData.get("course") || null,
-      };
-
-      // Add the new user to existing users
-      existingUsers.push(userData);
-      localStorage.setItem("users", JSON.stringify(existingUsers));
-
-      // Clear any previous error message
+        displayError("One of the details entered is invalid, please try again");
+        return;
+      }
       clearError();
 
-      // Display successful registration message
-      displaySuccessful("Registration successful!");
+      // Check if the identity certificate already exists in the database
+      fetch("/check-id", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idCard }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Error checking ID");
+          }
+        })
+        .then((data) => {
+          if (data.exists) {
+            displayError("This ID already exists");
+          } else {
+            // If all inputs are valid, proceed with registration
+            const formData = new FormData(event.target);
+            const userData = {
+              firstName,
+              lastName,
+              idCard,
+              password,
+              role: formData.get("role"),
+              course: formData.get("course") || null,
+            };
 
-      // Redirect to login page after a short delay
-      setTimeout(() => {
-        window.location.href = "login.html";
-      }, 2000);
-    }
+            // Send form data to backend
+            fetch("/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            })
+              .then((response) => {
+                if (response.ok) {
+                  window.location.href = "login.html"; // Redirect to login page
+                } else {
+                  return response.json().then((error) => {
+                    alert("Error: " + error.message);
+                  });
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again later.");
+              });
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("An error occurred. Please try again later.");
+        });
     });
-  
+
   // Clear error message function
   function clearError() {
     errorElement.textContent = "";
@@ -80,11 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Display error message function
   function displayError(message) {
+    //console.log("Displaying error message:", message); // Debugging: Log the error message being displayed
     errorElement.textContent = message;
-  }
-
-  // Display successful message function
-  function displaySuccessful(message) {
-    successfulElement.textContent = message;
   }
 });

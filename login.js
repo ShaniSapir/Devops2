@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const idCardInput = document.getElementById("idCard");
   const passwordInput = document.getElementById("password");
   const errorElement = document.getElementById("error");
+  clearError();
   document
     .getElementById("loginForm")
     .addEventListener("submit", function (event) {

@@ -141,8 +141,13 @@ button[type="submit"]:hover {
   color: red;
   text-align: center;
   margin-top: 10px; /* Reduced margin */
-  position: relative; /* Change position to relative */
 }
+/*#errorLabel {
+  color: red;
+  text-align: center;
+  margin-top: 10px; 
+  position: relative; 
+}*/
 .clear-storage {
   margin-top: 10px;
   /* Reduced margin */

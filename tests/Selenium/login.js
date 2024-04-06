@@ -1,37 +1,49 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
+const { Builder, By, until } = require("selenium-webdriver");
 
-// Define your Selenium WebDriver setup
-(async function example() {
-    let driver = await new Builder().forBrowser('chrome').build();
-    try {
-        // Open the login page
-        await driver.get('http://localhost:3000/login.html'); // Replace "file:///path/to/login.html" with the actual file path
+async function loginTest() {
+  const { expect } = await import("chai");
+  let driver = await new Builder().forBrowser("chrome").build();
+  try {
+    // Navigate to the login page
+    await driver.get("http://localhost:3000/login.html");
 
-        // Find input fields and button
-        const idCardInput = await driver.findElement(By.id('idCard'));
-        const passwordInput = await driver.findElement(By.id('password'));
-        const loginButton = await driver.findElement(By.xpath('//button[@type="submit"]'));
+    // Wait for the login form to load
+    await driver.wait(until.elementLocated(By.id("loginForm")), 2000);
 
-        // Enter credentials and submit the form
-        await idCardInput.sendKeys('123456789'); // Replace "your_id_card" with your actual ID card
-        await passwordInput.sendKeys('123456789', Key.RETURN); // Replace "your_password" with your actual password
+    // Clear inputs and fill login form with invalid inputs
+    await driver.findElement(By.id("idCard")).sendKeys("222222222");
+    await driver.findElement(By.id("password")).sendKeys("333333333");
+    await driver.findElement(By.css('button[type="submit"]')).click();
+    await driver.sleep(3000);
 
-        // Wait for page redirection or error message
-        await driver.wait(until.urlIs('http://localhost:3000/login.html') || until.urlIs('http://localhost:3000/login.html'), 5000);
+    // Wait for the error message to appear after unsuccessful login
+    await driver.wait(async () => {
+      const errorLabel = await driver.findElement(By.id("error"));
+      return await errorLabel.isDisplayed();
+    }, 10000);
+    //await driver.wait(until.elementLocated(By.id("error")), 5000);
+    let errorElement = await driver.findElement(By.id("error"));
+    let errorMessage = await errorElement.getText();
+    expect(errorMessage).to.contain("User not found");
 
-        // Check if redirected to the expected page
-        const currentUrl = await driver.getCurrentUrl();
-        if (currentUrl.includes('http://localhost:3000/login.html')) {
-            console.log('Login successful as a student!');
-        } else if (currentUrl.includes('http://localhost:3000/login.html')) {
-            console.log('Login successful as a teacher!');
-        } else {
-            // If not redirected, there might be an error message
-            const errorMessage = await driver.findElement(By.id('error')).getText();
-            console.log('Login failed. Error message:', errorMessage);
-        }
-    } finally {
-        // Close the browser
-        await driver.quit();
-    }
-})();
+    // Fill login form with valid inputs
+    await driver.findElement(By.id("idCard")).clear();
+    await driver.findElement(By.id("password")).clear();
+    await driver.findElement(By.id("idCard")).sendKeys("322257213");
+    await driver.findElement(By.id("password")).sendKeys("322257213");
+    await driver.findElement(By.css('button[type="submit"]')).click();
+    await driver.sleep(3000);
+
+    // Wait for the greeting message to appear after successful login
+    /*await driver.wait(until.elementLocated(By.id("greeting")), 5000);
+    let greetingElement = await driver.findElement(By.id("greeting"));
+    let greetingMessage = await greetingElement.getText();
+    expect(greetingMessage).to.contain("Hi");*/
+  } catch (error) {
+    console.error("Login test failed:", error);
+  } finally {
+    await driver.quit();
+  }
+}
+
+loginTest();

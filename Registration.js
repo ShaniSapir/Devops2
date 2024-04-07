@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("registrationForm")
     .addEventListener("submit", function (event) {
       event.preventDefault();
-
+      // Initialize isValid variable every time the form is submitted
+      let isValid = true;
       // Debugging: Log a message when the form is submitted
       //console.log("Form submitted");
 
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const idCardRegex = /^[0-9]{9}$/;
       const passwordRegex = /^.{9}$/;
 
-      let isValid = true;
+      
 
       if (
         !nameRegex.test(firstName) ||

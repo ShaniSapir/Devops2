@@ -25,17 +25,17 @@ import('chai').then(({ expect }) => {
       await driver.get('http://localhost:3000');
 
       // Fill registration form
-      await driver.findElement(By.id('firstName')).sendKeys('new');
-      await driver.findElement(By.id('lastName')).sendKeys('User');
-      await driver.findElement(By.id('idCard')).sendKeys('318761615');
-      await driver.findElement(By.id('password')).sendKeys('123456789');
-      await driver.findElement(By.id('role')).sendKeys('student');
+      await driver.findElement(By.id('firstName')).sendKeys('Hadar');
+      await driver.findElement(By.id('lastName')).sendKeys('Levi');
+      await driver.findElement(By.id('idCard')).sendKeys('318761616');
+      await driver.findElement(By.id('password')).sendKeys('password123');
+      await driver.findElement(By.id('role')).sendKeys('Student');
 
       // Submit the form
       await driver.findElement(By.css('button[type="submit"]')).click();
-      await driver.sleep(3000);
 
-      // Add assertion for successful registration message
+      // Wait for registration success alert
+      await driver.sleep(3000);
     }
     catch (error) {
       console.error("An error occurred:", error);

@@ -17,7 +17,10 @@ jobs:
       - checkout
       - run: npm install
       - run: npm rebuild
-      - run: npm run test:selenium
+      - run: npm run test:seleniumWebDriver
+      - run: npm run test:seleniumIDE
+      - run: npm run test:seleniumGrid
+
       - run: curl https://api.render.com/deploy/srv-chqhb7vdvk4goespcv70?key=R9EZrqaO4JA
 
 workflows:

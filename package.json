@@ -7,7 +7,9 @@
     "test": "node tests/test1.test.js",
     "lint": "eslint . --color",
     "start": "node server.js",
-    "test:selenium": "mocha tests/Selenium/*.js"
+    "test:seleniumGrid": "mocha tests/seleniumGrid/*.js",
+    "test:seleniumIDE": "mocha tests/seleniumIDE/*.js",
+    "test:seleniumWebDriver": "mocha tests/seleniumWebDriver/*.js"
   },
   "author": "Shani",
   "license": "ISC",

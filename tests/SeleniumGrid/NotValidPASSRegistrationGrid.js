@@ -26,16 +26,15 @@ import('chai').then(({ expect }) => {
 
       // Fill registration form
       await driver.findElement(By.id('firstName')).sendKeys('Hadar');
-      await driver.findElement(By.id('lastName')).sendKeys('User');
-      await driver.findElement(By.id('idCard')).sendKeys('218762615');
-      await driver.findElement(By.id('password')).sendKeys('111111111');
-      await driver.findElement(By.id('role')).sendKeys('student');
+      await driver.findElement(By.id('lastName')).sendKeys('Hey');
+      await driver.findElement(By.id('idCard')).sendKeys('000000000');
+      await driver.findElement(By.id('password')).sendKeys('88878');
+      await driver.findElement(By.id('role')).sendKeys('Student');
 
       // Submit the form
       await driver.findElement(By.css('button[type="submit"]')).click();
-      await driver.sleep(3000);
 
-      // Add assertion for successful registration message
+      await driver.sleep(3000);
     }
     catch (error) {
       console.error("An error occurred:", error);

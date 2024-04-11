@@ -25,6 +25,7 @@ async function loginTest() {
     let errorElement = await driver.findElement(By.id("error"));
     let errorMessage = await errorElement.getText();
     expect(errorMessage).to.contain("User not found");
+    console.log("Login with incorrect inputs");
 
     // Fill login form with valid inputs
     await driver.findElement(By.id("idCard")).clear();
@@ -33,12 +34,7 @@ async function loginTest() {
     await driver.findElement(By.id("password")).sendKeys("322257213");
     await driver.findElement(By.css('button[type="submit"]')).click();
     await driver.sleep(3000);
-
-    // Wait for the greeting message to appear after successful login
-    /*await driver.wait(until.elementLocated(By.id("greeting")), 5000);
-    let greetingElement = await driver.findElement(By.id("greeting"));
-    let greetingMessage = await greetingElement.getText();
-    expect(greetingMessage).to.contain("Hi");*/
+    console.log("Login with correct inputs");
   } catch (error) {
     console.error("Login test failed:", error);
   } finally {

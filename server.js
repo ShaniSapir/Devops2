@@ -95,6 +95,21 @@ app.post("/login.html", async (req, res) => {
   }
 });
 
+// Add a route to handle user deletion
+app.post("/delete-user", async (req, res) => {
+  const { idCard } = req.body;
+
+  try {
+    await User.deleteOne({ idCard }); // Delete the user from the database
+    res.status(200).json({ message: "User deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while deleting the user." });
+  }
+});
+
 // Route to serve your HTML file
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));

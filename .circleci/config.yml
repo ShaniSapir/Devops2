@@ -20,7 +20,7 @@ jobs:
       - run: npm run test:seleniumWebDriver
       - run: npm run test:seleniumIDE
       - run: npm run test:seleniumGrid
-
+      - run: npm run test:NonFunctional
       - run: curl https://api.render.com/deploy/srv-chqhb7vdvk4goespcv70?key=R9EZrqaO4JA
 
 workflows:

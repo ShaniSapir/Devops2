@@ -44,7 +44,7 @@ async function runTests() {
   console.log("Running tests in Chrome...");
   await loginTest('chrome');
   // Run tests in Firefox
-  console.log("Running tests in Firefox...");
+  console.log("Running tests in Firefox.");
   await loginTest('firefox');
 
   console.log("All tests completed.");
